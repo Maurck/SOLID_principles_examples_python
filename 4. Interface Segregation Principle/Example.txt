@@ -1,0 +1,20 @@
+Queremos poder enviar notificaciones vía email, Slack, o fichero txt ¿Qué firma tendrá la interface? 📨
+a) $notifier($content)
+b) $notifier($slackChannel, $messageTitle, $messageContent, $messageStatus) ❌
+c) $notifier($recieverEmail, $emailSubject, $emailContent) ❌
+d) $notifier($destination, $subject, $content) ❌
+e) $notifier($filename, $tag, $description) ❌
+
+Podemos descartar que las opciones B, C y E fueran interfaces válidas, puesto que se estaría haciendo
+Header Interface en base a la implementación (para Slack, email y fichero respectivamente).
+
+En el caso de la opción D, podríamos considerarlo inválido dado que el tipo $destination no nos ofrece ninguna especificidad (no sabemos si es un email, un canal…).
+
+Por último, en la opción A, sólo estaríamos enviando el contenido, por lo que las particularidades de cada uno de los tipos de notificación tendrían que venir dados en el constructor (dependiendo del caso de uso no siempre se podría).
+
+
+Las interfaces pertenecen a los clientes y no a quienes las implementan
+Diferencia: Nivel de abstracción de la implementación
+a) Si sabemos destinatario en tiempo de compilación (parámetros por constructor)
+d) Si no sabemos destinatario hasta tiempo de ejecución (perdemos el tipado)
+f) Dos subscribers diferentes (email y slack) que leen de módulos…
